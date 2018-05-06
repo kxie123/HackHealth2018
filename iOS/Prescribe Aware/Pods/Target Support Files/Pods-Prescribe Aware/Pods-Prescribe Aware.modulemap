@@ -1,0 +1,6 @@
+module Pods_Prescribe_Aware [system] {
+  umbrella header "Pods-Prescribe Aware-umbrella.h"
+
+  export *
+  module * { export * }
+}

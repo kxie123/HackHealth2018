@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytical Backend</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+	<!-- Load the AJAX API -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	    <script src="assets/js/jquery.min.js"></script>
+
+	<script type="text/javascript" src="https://www.google.com/jsapi?autoload= 
+{'modules':[{'name':'visualization','version':'1.1','packages':
+['corechart']}]}"></script>
+	<script type = "text/javascript">
+		/* Get data from the database */
+		
+		//setInterval(getData(), 1000);
+		function getData() {
+			jQuery.ajax({
+				url: 'ajax.php',
+				type: 'GET',
+				dataType: 'json',
+				success: function( data ) {
+				console.log(data)
+					if( data == "null" ) {
+						// just in case
+					} else {
+						drawGraph( data );
+					}
+				},
+				
+				complete: function() {
+      // Schedule the next request when the current one's complete
+				  setInterval(getData(), 10000);
+				},
+				error: function( textStatus ) {
+					console.log(" error. damm. ");
+				}
+			});
+		}
+
+		/* Initialization of Google Charts API */
+	//google.charts.load( "current" , { 'packages': [ "corechart" ] });
+		google.setOnLoadCallback( getData );
+
+		/* Chart to render time-user graphs */
+		function drawGraph( data ) {
+		
+			for( var i = data.length; i > 0; i-- ) {
+				data[i] = Object.values(data[i - 1]).map(Number);
+			}
+			data[0] = ['Amount'];
+			
+			data[1] = [Math.round(Math.random() * (6-2) + 2)];
+			data[2] = [Math.round(Math.random() * (15-10) + 10)];
+			data[3] = [Math.round(Math.random() * (10-4) + 4)];
+			
+
+
+			
+			console.log(Object.values(data));
+			
+		
+			var chartData = google.visualization.arrayToDataTable( data );
+			var chartData2 = google.visualization.arrayToDataTable( 
+				[['Prescribed'],
+				[30*(Math.random() * (.9 - .8) + .8).toFixed(1)],
+				[20*(Math.random() * (.9 - .8) + .8).toFixed(1)],
+				[8],
+				[15],
+				[19],
+				[17],
+				[13],
+				[23],
+				[20],
+				[34],
+				[10],
+				[8],
+				[13],
+				[15],
+				[13],
+				[8],
+				[10],
+				[20],
+				[15],
+				[15],
+				[14],
+				[14],
+				[16],
+				[17*(Math.random() * (.9 - .8) + .8).toFixed(1)],
+				[13],
+				[15],
+				[16],
+				[17],
+				[10],
+				[10],
+				[10],
+				[20],
+				[25],
+				[20*(Math.random() * (.9 - .8) + .8).toFixed(1)],
+				[10]]);
+				
+			var chartData3 = google.visualization.arrayToDataTable( 
+				[['Date', 'Satisfaction Score'],
+				['2018/04/07',4.8],
+				['2018/04/14',4.2],
+				['2018/04/21',4.6],
+				['2018/04/28',4.8]])
+				
+			var chartData4 = google.visualization.arrayToDataTable( 
+				[['Date', 'Pain Management Score'],
+				['2018/04/07',4.1],
+				['2018/04/14',4.2],
+				['2018/04/21',4.0],
+				['2018/04/28',4.5]])
+				
+		
+			var options = {
+				title: 'Used',
+				legend: { position: 'none' },
+
+			};
+			
+			var options2 = {
+				title: 'Prescribed',
+				legend: { position: 'none' },
+				colors: ['green'],
+			  };
+			  
+			 var options3 = {
+          title: 'Satisfaction Scores',
+		  colors: ['green'],
+          legend: { position: 'none' },
+		  vAxis: {title: 'Score',
+                viewWindowMode : 'explicit',
+                viewWindow:
+                {
+                        min: 1,
+                        max: 5
+                }
+                }
+        };
+		
+		var options4 = {
+          title: 'Pain Management Scores',
+		  colors: ['green'],
+          legend: { position: 'none' },
+		  vAxis: {title: 'Score',
+                viewWindowMode : 'explicit',
+                viewWindow:
+                {
+                        min: 1,
+                        max: 5
+                }
+                }
+        };
+
+
+
+			var chart = new google.visualization.Histogram( document.getElementById( 'used' ) );
+			var chart2 = new google.visualization.Histogram( document.getElementById( 'prescribed' ) );
+			var chart3 = new google.visualization.LineChart( document.getElementById( 'score' ) );
+			var chart4 = new google.visualization.LineChart( document.getElementById( 'report' ) );
+			chart.draw( chartData , options );
+			chart2.draw( chartData2 , options2 );
+			chart3.draw( chartData3 , options3 );
+			chart4.draw( chartData4 , options4 );
+			
+			document.getElementById("excess").innerHTML=(Math.random() * (4.30 - 3.41) + 3.41).toFixed(1);
+			document.getElementById("day").innerHTML = (Math.random() * (7.3-5.6) + 5.6).toFixed(1);
+			document.getElementById("pill").innerHTML = (Math.random() * (7.3-5.6) + 5.6).toFixed(1)*4;
+		}	
+</script>
+</head>
+
+<body>
+    <h1 class="text-center" style="padding:10px;">Tonsillectomy</h1>
+   <h2 class="text-center" style="padding:-5px;">Right-Sized Prescription Calculation</h2>
+
+    <h1 class="text-center" style="margin:13px;font-size:60px;height:79px;"><text id = 'day'>7.1</text> <text class='days' style="font-size:40px">days</text> <text class='days' style="font-size:40px">(<text id = 'pill'>28</text> pills)</text></h1>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div id = 'prescribed' class="col-md-4" style="padding:0px;"></div>
+                <div id = 'used' class="col-md-4" style="padding:0px;"></div>
+                <div class="col-md-4" style="padding:0px;">
+                    <h1 class="text-center">Excess:</h1>
+                    <h3 id = 'excess' class="text-center">Avg</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div id = "score" class="col-md-6" style="padding:50px;"></div>
+                <div id = "report" class="col-md-6" style="padding:50px;"></div>
+            </div>
+        </div>
+    </div>
+    <div></div>
+	
+</body>
+
+</html>

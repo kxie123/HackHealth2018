@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrescribeAwareSurvey</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Advent+Pro">
+    <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css">
+    <link rel="stylesheet" href="assets/css/Pretty-Registration-Form.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <div class="row register-form">
+        <div class="col-md-8 offset-md-2" style="width:379px;">
+            <form action = "SMS.php" method = "post" class="custom-form">
+                <div class="form-group">
+                    <h1>Try out our demo at PrescribeAware.com!</h1>
+                </div><label>Please enter a 10 digit phone number:</label>
+                <div class="form-group"><input class="form-control d-inline" name = "phone" type="tel" required="" maxlength="10" minlength="10" pattern="^\d{10}$" style="width:213px;"></div>
+				<div class="form-group"><button id = "btnsubmit" class="btn btn-primary" name = "demosubmit" type="submit">Submit&nbsp;</button></div>
+			</form>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
